@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tian.cola.dao.moment.MomentDAO">
+	
+	<select id="getMoments" resultType="com.tian.cola.dto.moment.MomentDTO">
+		select * from coffee_moment
+	</select>
+	<select id="getUserMoment" parameterType="java.util.Map" resultType="com.tian.cola.dto.moment.MomentDTO">
+		select m.* from coffee_moment m where m.user_id = #{id}
+	</select>
+	<insert id="createMoment" parameterType="com.tian.cola.dto.moment.MomentDTO">
+		INSERT INTO coffee_moment (
+			id_moment,
+			moment_content,
+			user_id,
+			created_by,
+			date_created,
+			updated_by,
+			date_updated)
+		VALUES
+		   (#{idMoment},
+			#{momentContent},
+			#{userId},
+			#{createdBy},
+			now(),
+			#{updatedBy},
+			now())
+	</insert>
+</mapper>
